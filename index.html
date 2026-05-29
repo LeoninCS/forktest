@@ -17,6 +17,19 @@
     <title>Igloo Inc.</title>
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon32-af94112f.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon16-9e4401be.png">
+    <script>
+      (() => {
+        const NativeWorker = window.Worker;
+        window.Worker = class extends NativeWorker {
+          constructor(url, options) {
+            const normalized = typeof url === "string" && url.startsWith("/assets/")
+              ? `${location.pathname.replace(/\/[^/]*$/, "/")}${url.slice(1)}`
+              : url;
+            super(normalized, options);
+          }
+        };
+      })();
+    </script>
     <script type="module" crossorigin src="assets/index-2eb69c09.js"></script>
   </head>
   <body></body>
