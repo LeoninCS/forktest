@@ -1,0 +1,22 @@
+{
+  "name": "forktest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "serve": "python3 -m http.server 45173",
+    "serve:source": "python3 -m http.server 43173 --directory .fork-skill/source",
+    "capture:source": "node /Users/sealos/repositories/fork-skill/scripts/capture-evidence.mjs --source http://127.0.0.1:43173/www.igloo.inc/index.html --out .fork-skill/evidence/source-pass --viewports desktop=1440x900,mobile=390x844",
+    "capture": "node /Users/sealos/repositories/fork-skill/scripts/capture-evidence.mjs --source http://127.0.0.1:43173/www.igloo.inc/index.html --target http://127.0.0.1:45173/ --out .fork-skill/evidence/latest --viewports desktop=1440x900,mobile=390x844 --interactions .fork-skill/interactions.json",
+    "validate": "node /Users/sealos/repositories/fork-skill/scripts/validate-evidence.mjs --evidence .fork-skill/evidence/latest --out .fork-skill/reports/latest --threshold 0.02",
+    "validate:stable": "node scripts/stable-validate.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "pixelmatch": "^7.2.0",
+    "playwright": "^1.60.0",
+    "pngjs": "^7.0.0"
+  }
+}
